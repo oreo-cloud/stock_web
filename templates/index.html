@@ -15,17 +15,30 @@
 </head>
 <body>
     <div class="navbar">
-        <img src="{{ url_for('static', filename='image/logo.png') }}" alt="Logo" width="100">
+        <div class="navbar-center">
+            <img src="{{ url_for('static', filename='image/logo.png') }}" alt="Logo" class="logo">
+        </div>
     </div>
 
-    <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+    <div class="double-navbar">
+        <button class="sidebar-toggle" onclick="toggleSidebar()" aria-label="展開選單">
+            <!-- SVG icon 或 ☰ -->
+            <svg width="28" height="28" viewBox="0 0 32 32">
+                <rect y="6" width="32" height="4" rx="2" fill="#535353"/>
+                <rect y="14" width="32" height="4" rx="2" fill="#535353"/>
+                <rect y="22" width="32" height="4" rx="2" fill="#535353"/>
+            </svg>
+        </button>
+    </div>
+
 
     <div class="sidebar" id="sidebar">
-        <ul>
-            <li>0050</li>
-            <li>2330</li>
-            <li>2317</li>
-        </ul>
+        <div id="user-stock-list">
+            <div class="stock-btns" id="stock-btns">
+                <!-- 這裡由 JS 動態生成股票按鈕 -->
+            </div>
+        </div>
+
 
         <div class="add-stock" onclick="add_stock()">
             <img src="{{ url_for('static', filename='image/add.png') }}" alt="Logo" id="add-icon">
@@ -36,7 +49,6 @@
     <div class="container" id="container">
         <h1>歡迎來到股票資訊網站</h1>
         <p>這裡是你的股票資訊平台，提供最新的股票市場動態。</p>
-        <button>了解更多</button>
     </div>
 
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
