@@ -1,15 +1,39 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <title>股票資訊</title>
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- jQuery (Select2 需要) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Select2 -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <div class="navbar">
         <img src="{{ url_for('static', filename='image/logo.png') }}" alt="Logo" width="100">
     </div>
-    <div class="container">
+
+    <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+
+    <div class="sidebar" id="sidebar">
+        <ul>
+            <li>0050</li>
+            <li>2330</li>
+            <li>2317</li>
+        </ul>
+
+        <div class="add-stock" onclick="add_stock()">
+            <img src="{{ url_for('static', filename='image/add.png') }}" alt="Logo" id="add-icon">
+            <span>新增股票</span> 
+        </div>
+
+    </div>
+    <div class="container" id="container">
         <h1>歡迎來到股票資訊網站</h1>
         <p>這裡是你的股票資訊平台，提供最新的股票市場動態。</p>
         <button>了解更多</button>

@@ -1,15 +1,8 @@
-from flask import Flask, render_template
-import pandas as pd
 import requests
+import pandas as pd
 from bs4 import BeautifulSoup
 from io import StringIO
 import urllib3
-from dotenv import load_dotenv
-import os
-
-load_dotenv()  # 這行要在你讀 os.environ 之前
-
-app = Flask(__name__)
 
 # 關掉警告
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
@@ -35,20 +28,6 @@ def fetch_twse_isin(url):
     ]
     return df
 
-@app.route('/get_stocks_names', methods=['GET'])
-def get_stocks_names():
-    url = os.getenv('all_stocks_URL')
-    df = fetch_twse_isin(url)
-    return df.to_json(orient='records', force_ascii=False)
-
-# @app.route('/add_stock', methods=['POST'])
-# def add_stock():
-    
-
-@app.route('/')
-def home():
-    # 回傳 templates/index.html
-    return render_template('index.html')
-
-if __name__ == '__main__':
-    app.run()
+url = "https://isin.twse.com.tw/isin/C_public.jsp?strMode=2"
+df = fetch_twse_isin(url)
+print(df.head())
