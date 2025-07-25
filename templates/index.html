@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>股票資訊</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <img src="{{ url_for('static', filename='image/logo.png') }}" alt="Logo" width="100">
+    </div>
+    <div class="container">
+        <h1>歡迎來到股票資訊網站</h1>
+        <p>這裡是你的股票資訊平台，提供最新的股票市場動態。</p>
+        <button>了解更多</button>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>

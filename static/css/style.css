@@ -1,0 +1,31 @@
+body {
+    background: #000000;
+    font-family: "微軟正黑體", Arial, sans-serif;
+}
+h1 {
+    color: #ffffff;
+}
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+.navbar {
+    background-color: #ffffff;
+    width: 100vw;    /* 使用 100vw 保證視窗寬度 */
+    height: 60px;    /* 固定高度 */
+    position: fixed; /* 固定在頁面最上方 */
+    top: 0;
+    left: 0;
+    z-index: 1000;   /* 保證在最上層 */
+    display: flex;
+    align-items: center;
+    padding: 10px 30px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
