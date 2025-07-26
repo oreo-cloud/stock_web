@@ -14,21 +14,24 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
+    <!-- 第一層：Logo -->
     <div class="navbar">
         <div class="navbar-center">
             <img src="{{ url_for('static', filename='image/logo.png') }}" alt="Logo" class="logo">
         </div>
     </div>
 
-    <div class="double-navbar">
+    <!-- 第二層：漢堡/標題 -->
+    <div class="sub-navbar">
         <button class="sidebar-toggle" onclick="toggleSidebar()" aria-label="展開選單">
-            <!-- SVG icon 或 ☰ -->
             <svg width="28" height="28" viewBox="0 0 32 32">
                 <rect y="6" width="32" height="4" rx="2" fill="#535353"/>
                 <rect y="14" width="32" height="4" rx="2" fill="#535353"/>
                 <rect y="22" width="32" height="4" rx="2" fill="#535353"/>
             </svg>
         </button>
+        <div class="sub-navbar-title">歡迎來到股票資訊網站</div>
+        <!-- 其他功能區塊可加在這裡 -->
     </div>
 
 

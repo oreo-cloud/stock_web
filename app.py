@@ -33,10 +33,6 @@ def get_last_year_str():
         last_year = now.year - 1
     return str(last_year)
 
-from collections import Counter
-from datetime import datetime
-import requests
-
 def get_dividend_info(stock_code):
     last_year = get_last_year_str()
     url = 'https://api.finmindtrade.com/api/v4/data'
@@ -113,7 +109,6 @@ def get_dividend_info(stock_code):
         'raw_counter': dict(counter),
         'latest_dividend': latest_dividend
     }
-
 
 def fetch_twse_daily():
     db = client['stockdb']
