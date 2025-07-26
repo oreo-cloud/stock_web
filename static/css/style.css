@@ -93,8 +93,51 @@ button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
 .stock-btn:hover { background: #e0eaff; }
 
 .add-stock {
-    position: absolute; display: flex; height: 100px; width: auto;
-    top: 75vh; left: 8vw; flex-direction: column; align-items: center; cursor: pointer;
+    position: fixed;      /* 固定定位 */
+    bottom: 10vh;            /* 貼齊視窗下方 */
+    left: 0;              /* 從最左邊開始 */
+    width: 100%;          /* 橫向佔滿 */
+    height: 10vh;         /* 高度為視窗的 10%；也可以改成固定 px */
+    
+    display: flex;        /* 啟用 Flex 版面 */
+    justify-content: center;  /* 水平置中內容 */
+    align-items: center;      /* 垂直置中內容 */
+    
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #272727;
+    cursor: pointer;
+    
+    /* 如果想要圓角，可加上下面這行 */
+    /* border-radius: 5px; */
+}
+
+#calculate_stock {
+    height: 30px;
+}
+
+.add-stock:hover {
+    opacity: 0.5;
+}
+
+#calculate_stock {
+    display: flex;        /* 啟用 Flex 版面 */
+    justify-content: center;  /* 水平置中內容 */
+    align-items: center;      /* 垂直置中內容 */
+}
+
+.stock_cal_div {
+  display: flex;            /* 啟用 Flex 版面 */
+  flex-direction: row;      /* 子項目橫向排列（預設即為 row，可省略） */
+  align-items: center;      /* 若要垂直置中，可加這行 */
+  gap: 8px;                 /* 子項間距，可依需求調整 */
+}
+
+/* 讓 p 變成 flex 容器，p 裡的 input 與 button 就會並排 */
+.stock_cal_div p {
+  display: flex;       /* 啟用 Flex */
+  align-items: center; /* 垂直置中 */
+  gap: 8px;            /* 子項間距 */
+  margin: 0;           /* 移除 p 的上下外距，避免多餘空白 */
 }
 
 /* ================= 響應式（平板）================== */
@@ -123,7 +166,7 @@ button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
         justify-content: center;
     }
     .logo {
-        height: 20px;
+        height: 50px;
         max-width: 60px;
         margin: 0 auto;
         display: block;

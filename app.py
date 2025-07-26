@@ -8,21 +8,22 @@ import os
 from datetime import datetime, timedelta
 import pytz
 from pymongo import MongoClient
-from pymongo.server_api import ServerApi
 from collections import Counter
 
 load_dotenv()  # 這行要在你讀 os.environ 之前
 
 app = Flask(__name__)
 
-uri = os.getenv('mongo_url')
-client = MongoClient(uri, server_api=ServerApi('1'))
+mongodb_uri= os.getenv('mongo_uri')
+client = MongoClient(mongodb_uri)
 
 def get_yesterday_str():
     tz = pytz.timezone('Asia/Taipei')
     now = datetime.now(tz)
     yest = now - timedelta(days=1)
+    # 格式化為 YYYYMMDD
     return yest.strftime('%Y%m%d')
+
 
 def get_last_year_str():
     tz = pytz.timezone('Asia/Taipei')
@@ -126,6 +127,7 @@ def fetch_twse_daily():
     all_stocks_url_prefix = os.getenv('all_stocks_url_prefix')
     all_stocks_url_postfix = os.getenv('all_stocks_url_postfix')
     url = f"{all_stocks_url_prefix}{date_str}{all_stocks_url_postfix}"
+    print(f"抓取台灣證券交易所資料: {url}")
     resp = requests.get(url)
     resp.encoding = 'big5'
 

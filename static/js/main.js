@@ -142,31 +142,80 @@ function load_user_stocks() {
         });
 }
 
-// 在 container 顯示股票詳情並帶 loading
 function showStockInfo(code, name) {
     const container = document.getElementById('container');
-    container.innerHTML = `<div class="loading" style="font-size:22px; text-align:center; margin-top:32px;">載入中...</div>`;
+    container.innerHTML = `
+      <div class="loading" style="font-size:22px; text-align:center; margin-top:32px;">
+        載入中...
+      </div>
+    `;
+
     fetch(`/get_dividend_info?code=${code}`)
-        .then(response => response.json())
-        .then(stockData => {
-            // 用 API 回傳的 key！注意大小寫
-            let mainMonths = (stockData.Payment_cycle || []).map(m => `${m}月`).join('、') || '-';
-            let html = `
-                <div style="padding: 24px 8px 8px 8px;">
-                  <h2>${name}（${code}）</h2>
-                  <hr>
-                  <p><b>常見配息月：</b>${mainMonths}</p>
-                  <p><b>最新現金股利：</b> ${stockData.dividend ?? '-'} 元</p>
-                  <p><b>成交價：</b> ${stockData.stock_transaction_price ?? '-'} 元</p>
-                  <p><b>最新殖利率：</b> ${stockData.yield ?? '-'} %</p>
-                </div>
-            `;
-            container.innerHTML = html;
-        })
-        .catch(e => {
-            container.innerHTML = '<p style="color:red">查詢失敗，請稍後再試！</p>';
+      .then(response => response.json())
+      .then(stockData => {
+        // 處理 API 回傳資料
+        const mainMonths = (stockData.Payment_cycle || [])
+          .map(m => `${m}月`)
+          .join('、') || '-';
+
+        // 產生 HTML
+        const html = `
+          <div style="padding:24px 8px 8px 8px;">
+            <h2>${name}（${code}）</h2>
+            <hr>
+            <p><b>常見配息月：</b>${mainMonths}</p>
+            <p><b>最新現金股利：</b>${stockData.dividend ?? '-'} 元</p>
+            <p><b>成交價：</b>${stockData.stock_transaction_price ?? '-'} 元</p>
+            <p><b>最新殖利率：</b>${stockData.yield ?? '-'} %</p>
+            <div class="stock_cal_div" style="display:flex;align-items:center;gap:8px;margin:0;">
+              <b>輸入你有的股數：</b>
+              <input
+                id="stock_count_input"
+                type="number"
+                placeholder="股數"
+                style="width:200px;height:20px;padding:4px;"
+              >
+              <button
+                id="calculate_stock"
+                data-dividend="${stockData.dividend ?? 0}"
+              >
+                計算
+              </button>
+            </div>
+            <div id="calc_result" style="margin-top:10px;"></div>
+          </div>
+        `;
+        container.innerHTML = html;
+
+        // —————— 在這裡綁定按鈕事件 ——————
+        const btn = document.getElementById('calculate_stock');
+        btn.addEventListener('click', () => {
+          const count = parseInt(
+            document.getElementById('stock_count_input').value,
+            10
+          ) || 0;
+          const dividend = Number(btn.dataset.dividend) || 0;
+          const resultEl = document.getElementById('calc_result');
+
+          if (!count) {
+            resultEl.textContent = '請輸入大於 0 的股數';
+            return;
+          }
+          if (dividend <= 0) {
+            resultEl.textContent = '無法取得現金股利資料';
+            return;
+          }
+
+          const total = count * dividend;
+          resultEl.textContent = `現金股利：${total.toLocaleString()} 元`;
         });
+      })
+      .catch(e => {
+        container.innerHTML = '<p style="color:red">查詢失敗，請稍後再試！</p>';
+      });
 }
+
+
 
 // 點主畫面自動收回 sidebar (手機)
 document.getElementById('container').addEventListener('click', function() {
