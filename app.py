@@ -24,7 +24,6 @@ def get_yesterday_str():
     # 格式化為 YYYYMMDD
     return yest.strftime('%Y%m%d')
 
-
 def get_last_year_str():
     tz = pytz.timezone('Asia/Taipei')
     now = datetime.now(tz)

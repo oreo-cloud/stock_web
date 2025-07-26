@@ -140,6 +140,12 @@ button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
   margin: 0;           /* 移除 p 的上下外距，避免多餘空白 */
 }
 
+#stock_count_input {
+    width:200px;
+    height:20px;
+    padding:4px;
+}
+
 /* ================= 響應式（平板）================== */
 @media (max-width: 992px) {
     .container {
@@ -155,6 +161,24 @@ button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
     .navbar {
         height: 56px;
         padding: 0 6px;
+    }
+    .add-stock {
+        position: fixed;      /* 固定定位 */
+        bottom: 2vh;            /* 貼齊視窗下方 */
+        left: 0;              /* 從最左邊開始 */
+        width: 100%;          /* 橫向佔滿 */
+        height: 10vh;         /* 高度為視窗的 10%；也可以改成固定 px */
+        
+        display: flex;        /* 啟用 Flex 版面 */
+        justify-content: center;  /* 水平置中內容 */
+        align-items: center;      /* 垂直置中內容 */
+        
+        background-color: rgba(255, 255, 255, 0.8);
+        color: #272727;
+        cursor: pointer;
+        
+        /* 如果想要圓角，可加上下面這行 */
+        /* border-radius: 5px; */
     }
 }
 
@@ -198,10 +222,31 @@ button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
         width: 98%;
     }
     .add-stock {
-        position: absolute; display: flex; height: 100px; width: auto;
-        top: 83vh; left: 28vw; flex-direction: column; align-items: center; cursor: pointer;    
+        position: fixed;      /* 固定定位 */
+        bottom: 5vh;            /* 貼齊視窗下方 */
+        left: 0;              /* 從最左邊開始 */
+        width: 100%;          /* 橫向佔滿 */
+        height: 10vh;         /* 高度為視窗的 10%；也可以改成固定 px */
+        
+        display: flex;        /* 啟用 Flex 版面 */
+        justify-content: center;  /* 水平置中內容 */
+        align-items: center;      /* 垂直置中內容 */
+        
+        background-color: rgba(255, 255, 255, 0.8);
+        color: #272727;
+        cursor: pointer;
+        
+        /* 如果想要圓角，可加上下面這行 */
+        /* border-radius: 5px; */
     }
     h1 { font-size: 1rem; }
+
+    
+    #stock_count_input {
+        width:100px;
+        height:20px;
+        padding:4px;
+    }
 }
 
 /* sidebar動畫與展開 */

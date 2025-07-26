@@ -2,15 +2,17 @@ version: '3.8'
 
 services:
   stockweb:
-    build:
-      context: .
-    image: stockweb:latest
+    # 移除 build，改用遠端映像
+    image: oreoxy/stockweb:latest  
+    # 如果想每次都重新 pull，加上下面一行（Docker Compose v2+ 支援）
+    pull_policy: always  
+
     depends_on:
       - mongo
     ports:
       - "5000:5000"
     env_file:
-      - .env                        # ← 加這行，讓 Compose 自動載入 .env
+      - .env
     environment:
       - FLASK_APP=app.py
       - FLASK_RUN_HOST=0.0.0.0

@@ -173,7 +173,6 @@ function showStockInfo(code, name) {
                 id="stock_count_input"
                 type="number"
                 placeholder="股數"
-                style="width:200px;height:20px;padding:4px;"
               >
               <button
                 id="calculate_stock"
